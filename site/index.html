@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>好市多特價整理</title>
+<meta name="description" content="每天自動整理 Costco 台灣的會員護照與限時優惠，出門前先查好價格。">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14171c" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏷️</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>好市多特價整理</h1>
+    <p class="summary" id="summary">載入中…</p>
+    <nav class="tabs" role="tablist">
+      <a href="#deals" role="tab" data-tab="deals">特價</a>
+      <a href="#wish" role="tab" data-tab="wish">想買清單 <span class="count" id="wishCount" hidden></span></a>
+      <a href="#me" role="tab" data-tab="me">我的資料</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 特價列表 -->
+  <section id="tab-deals" class="tab">
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="搜尋名稱、品牌或商品編號" autocomplete="off" enterkeyhint="search">
+      <div class="row">
+        <div class="seg" id="src" role="group" aria-label="優惠類型">
+          <button data-v="all" aria-pressed="true">全部</button>
+          <button data-v="wallet" aria-pressed="false">會員護照</button>
+          <button data-v="hot" aria-pressed="false">其他限時優惠</button>
+        </div>
+        <label class="sort">排序
+          <select id="sort">
+            <option value="off">折扣金額</option>
+            <option value="pct">折扣比例</option>
+            <option value="end">快結束</option>
+            <option value="new">新上架</option>
+            <option value="price">價格低到高</option>
+          </select>
+        </label>
+      </div>
+      <div class="chips" id="groups"></div>
+    </div>
+    <p class="hint" id="resultInfo"></p>
+    <div class="list" id="list"></div>
+  </section>
+
+  <!-- 想買清單 -->
+  <section id="tab-wish" class="tab" hidden>
+    <div class="panel">
+      <h2>追蹤關鍵字</h2>
+      <p class="hint">只要有特價商品名稱含這些字就會列出來，例如「衛生紙」「鷄精」「Ariel」。</p>
+      <form id="kwForm" class="inline-form">
+        <input id="kwInput" type="text" placeholder="輸入關鍵字" autocomplete="off">
+        <button type="submit">加入</button>
+      </form>
+      <div class="chips" id="kwChips"></div>
+    </div>
+    <h2 class="sec">正在特價</h2>
+    <div class="list" id="wishOn"></div>
+    <h2 class="sec">收藏中，目前沒特價</h2>
+    <div class="list" id="wishOff"></div>
+  </section>
+
+  <!-- 我的資料 -->
+  <section id="tab-me" class="tab" hidden>
+    <div class="panel">
+      <h2>我記錄的賣場原價</h2>
+      <p class="hint">在商品卡片按「記錄賣場價」，填入你在現場看到的<strong>原價</strong>（沒折扣前）。之後這個商品再特價，網站就會幫你算出賣場大概多少錢。</p>
+      <div id="storeList"></div>
+    </div>
+    <div class="panel">
+      <h2>手機、電腦同步</h2>
+      <p class="hint">收藏、關鍵字和賣場價只存在這個瀏覽器裡。要換裝置時，在舊裝置按「複製」，到新裝置貼上後按「匯入」。</p>
+      <textarea id="backup" rows="4" spellcheck="false" placeholder="在這裡貼上備份內容"></textarea>
+      <div class="btns">
+        <button id="copyBackup">複製我的資料</button>
+        <button id="importBackup">匯入</button>
+      </div>
+      <p class="hint" id="backupMsg"></p>
+    </div>
+    <div class="panel about">
+      <h2>價格怎麼看</h2>
+      <ul>
+        <li><strong>網站上的價格是官網的「線上價」</strong>，已經含運費，所以通常比賣場貴一些。</li>
+        <li><strong>會員護照</strong>的折扣金額在線上和賣場是一樣的；其他限時優惠有些只限線上。</li>
+        <li>所以最準的算法是：<strong>賣場原價 − 折扣金額</strong>。記錄過賣場原價的商品會自動幫你算。</li>
+        <li>商品編號跟賣場價格牌上的編號相同，現場可以直接對照。</li>
+        <li>賣場獨有的現場優惠官網查不到，可以看網友整理的<a href="https://www.daybuy.tw/costco/hypermarket-news/" target="_blank" rel="noopener">賣場目擊情報</a>。</li>
+      </ul>
+      <p class="hint">資料每天自動從 <a href="https://www.costco.com.tw/Saving-Coupons/c/Wallet" target="_blank" rel="noopener">Costco 官網</a> 整理而來，本站為個人非官方整理，實際價格以賣場為準。</p>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
