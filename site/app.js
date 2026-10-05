@@ -146,7 +146,8 @@ function card(it, extraBadges = '') {
       ${priceBlock(it)}
       ${unitLine(it)}
       <div class="badges">
-        ${wallet ? `<span class="b wallet">會員護照${it.online ? '・賣場同步' : ''}</span>` : '<span class="b">可能僅限線上</span>'}
+        ${!wallet ? '<span class="b">可能僅限線上</span>' : it.walletOnline ? '<span class="b wallet">會員護照・僅限線上</span>'
+          : `<span class="b wallet">會員護照${it.online ? '・賣場同步' : ''}</span>`}
         ${it.online ? '' : '<span class="b storeonly">賣場限定</span>'}
         ${endBadge}
         ${isNew ? '<span class="b new">新上架</span>' : ''}

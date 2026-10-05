@@ -192,6 +192,13 @@ def add_coupons(items, leaves):
     added = 0
     for c in book["coupons"]:
         it = by_code.get(c["code"])
+        if c.get("onlineOnly"):
+            # 「僅限好市多線上購物」的券：線上資料已經有這個折扣，只標記一下
+            if it:
+                it["walletOnline"] = True
+                if "wallet" not in it["src"]:
+                    it["src"] = sorted(it["src"] + ["wallet"])
+            continue
         if it:
             info = store_info(c)
             # 會員護照的折扣線上、賣場相同；對不上表示辨識有誤，只留圖片
@@ -216,7 +223,8 @@ def add_coupons(items, leaves):
         items.append(it)
         by_code[it["code"]] = it
         added += 1
-    print(f"會員護照：{len(book['coupons'])} 張，新增賣場限定 {added} 項")
+    online_only = sum(bool(c.get("onlineOnly")) for c in book["coupons"])
+    print(f"會員護照：{len(book['coupons'])} 張（賣場券 {len(book['coupons']) - online_only}、線上券 {online_only}），新增賣場限定 {added} 項")
 
 
 def deal_of(it):

@@ -76,7 +76,7 @@ def tokens(lines):
                 continue
             raw = re.sub(r"[.,]", "", m[3])
             tok = {"neg": bool(m[1]), "dollar": bool(m[2]), "v": int(raw), "raw": raw,
-                   "unit": m[4], "y": ln["y"], "h": ln["h"], "rank": rank}
+                   "unit": m[4], "x": ln["x"], "y": ln["y"], "h": ln["h"], "rank": rank}
             key = (tok["neg"], tok["dollar"], tok["v"], round(tok["y"], 2))
             if key not in seen:
                 seen.add(key)
@@ -133,12 +133,32 @@ def rescue(toks, off):
     return None
 
 
-def read_prices(lines):
-    """從 OCR 結果找出賣場售價。回傳 dict，讀不出來時只有 code。"""
+def columns(toks):
+    """同一張券上並排好幾組價格（例如雙人／加大／特大三種尺寸）時回傳 True。"""
+    xs = set()
+    for a, b, c in itertools.permutations(toks, 3):
+        if (not a["neg"] and b["neg"] and c["dollar"] and a["y"] < b["y"] < c["y"]
+                and b["v"] > 0 and a["v"] - b["v"] == c["v"]):
+            xs.add(round(a["x"], 1))
+    return len({x for x in xs if not any(0 < x - y <= 0.1 for y in xs)}) > 1
+
+
+def read_prices(lines, orange):
+    """從 OCR 結果找出賣場售價。orange 是右上角橘色標籤的比例（線上券才有）。
+    回傳 dict，讀不出來時只有 code。"""
     text = " ".join(ln["t"] for ln in lines)
     item = re.search(r"ITEM\s*(\d{4,8})", text)
     res = {"code": item[1] if item else None}
     toks = tokens(lines)
+    # 「僅限好市多線上購物」券印的是線上價；用右上角的橘色標籤判斷（實測線上券 0.41、賣場券 0）
+    res["orange"] = round(orange, 2)
+    res["store"] = orange < 0.15
+    if not res["store"]:
+        return res
+    # 多種尺寸並排（雙人／加大／特大）的券無法對應到單一價格
+    if columns(toks):
+        res["skip"] = "多組價格"
+        return res
 
     best = find_triple(toks, exact=True) or find_triple(toks, exact=False)
     if best:
@@ -154,7 +174,6 @@ def read_prices(lines):
     else:
         # 留著數字，之後如果知道線上折扣，還能用 rescue() 再試一次
         res["toks"] = [{k: t[k] for k in ("neg", "dollar", "v", "raw", "unit", "y")} for t in toks]
-    res["store"] = "賣場售價" in text or "活動售價" in text
     return res
 
 
@@ -196,7 +215,7 @@ def ocr_new(cards, cache):
             print(r.stderr, file=sys.stderr)
         for line in r.stdout.splitlines():
             d = json.loads(line)
-            cache[paths[d["file"]]] = read_prices(d["lines"])
+            cache[paths[d["file"]]] = read_prices(d["lines"], d.get("orange", 0))
     ok = sum("price" in cache[c["id"]] for c in todo if c["id"] in cache)
     print(f"辨識 {len(todo)} 張新優惠券，讀出價格 {ok} 張")
 
@@ -217,9 +236,14 @@ def fetch(known_offs=None):
         code = c["code"] or r.get("code")
         if not code:
             continue  # 眼鏡、隱形眼鏡這類沒有單一商品的券
-        if "price" not in r and r.get("toks") and (known_offs or {}).get(code):
-            r = {**r, **(rescue(r["toks"], known_offs[code]) or {})}
-        coupons.append({**c, "code": code, **{k: r[k] for k in ("base", "off", "price", "unit", "special") if r.get(k)}})
+        entry = {**c, "code": code}
+        if r and not r.get("store"):
+            entry["onlineOnly"] = True  # 線上券：價格是線上價，不能當賣場價
+        elif r.get("store") and not r.get("skip"):
+            if "price" not in r and r.get("toks") and (known_offs or {}).get(code):
+                r = {**r, **(rescue(r["toks"], known_offs[code]) or {})}
+            entry.update({k: r[k] for k in ("base", "off", "price", "unit", "special") if r.get(k)})
+        coupons.append(entry)
     print(f"會員護照 {start}～{end}：{len(coupons)} 張商品優惠券")
     return {"start": start, "end": end, "coupons": coupons}
 
