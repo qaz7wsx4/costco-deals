@@ -130,6 +130,13 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .was { color: var(--muted); text-decoration: line-through; font-size: .9rem; }
 .off { color: var(--price); font-weight: 600; font-size: .9rem; }
 .unit { color: var(--muted); font-size: .8rem; }
+.tag { font-size: .75rem; font-weight: 700; padding: 1px 6px; border-radius: 5px; background: var(--surface-2); color: var(--muted); align-self: center; }
+.tag.store { background: var(--good-soft); color: var(--good); }
+.per { font-size: .85rem; font-weight: 600; }
+.online { color: var(--muted); font-size: .8rem; }
+.now.muted { color: var(--muted); font-size: 1rem; }
+.b.storeonly { background: var(--good-soft); color: var(--good); font-weight: 600; }
+.card .coupon { grid-column: 1 / -1; width: 100%; max-width: 420px; justify-self: center; border-radius: 8px; border: 1px solid var(--line); background: #fff; }
 .badges { display: flex; gap: 4px; flex-wrap: wrap; }
 .b { font-size: .75rem; padding: 1px 7px; border-radius: 6px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
 .b.wallet { background: var(--accent-soft); color: var(--accent); font-weight: 600; }

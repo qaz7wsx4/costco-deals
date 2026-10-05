@@ -49,19 +49,32 @@ async function init() {
     $('#summary').textContent = '資料載入失敗，請稍後重新整理。';
     return;
   }
-  items.forEach((it) => byCode.set(it.code, it));
+  items.forEach((it) => { it.eff = effective(it); byCode.set(it.code, it); });
   renderSummary();
   renderGroups();
   bindUI();
   route();
 }
 
+// 卡片上主要顯示的價格：有優惠券上的賣場售價就用賣場價，否則用線上價
+function effective(it) {
+  const s = it.store || {};
+  if (s.price) {
+    const base = s.base || null, off = s.off || (s.special ? null : it.off);
+    return { where: 'store', price: s.price, base, off, pct: base && off ? Math.round(off / base * 100) : null, unit: s.unit };
+  }
+  if (it.price != null) return { where: 'online', price: it.price, base: it.base, off: it.off, pct: it.pct };
+  return { where: 'none', price: null, base: null, off: null, pct: null };
+}
+
 function renderSummary() {
   const wallet = items.filter((i) => i.src.includes('wallet')).length;
+  const storePriced = items.filter((i) => i.eff.where === 'store').length;
   const endingToday = items.filter((i) => i.end === today).length;
   const upd = updated ? `${md(updated.slice(0, 10))} ${updated.slice(11, 16)} 更新` : '';
   $('#summary').textContent =
-    `${items.length} 項特價・會員護照 ${wallet} 項` + (endingToday ? `・${endingToday} 項今天結束` : '') + `・${upd}`;
+    `${items.length} 項特價・會員護照 ${wallet} 項（${storePriced} 項有賣場價）` +
+    (endingToday ? `・${endingToday} 項今天結束` : '') + `・${upd}`;
 }
 
 // 同一檔特價以外，最近一次的特價
@@ -73,11 +86,43 @@ function lastDeal(code, current) {
 
 function storeEstimate(it) {
   const rec = me.store[it.code];
-  if (!rec || !(rec.price > it.off)) return null;
+  if (it.eff.where === 'store' || !rec || !(rec.price > it.off)) return null;
   return { price: rec.price - it.off, rec };
 }
 
 // ---------- 商品卡 ----------
+function priceBlock(it) {
+  const e = it.eff;
+  const per = e.unit ? `<span class="per">/${esc(e.unit)}</span>` : '';
+  const offText = e.off ? `<span class="off">折 ${money(e.off)}${e.pct ? `（${e.pct}%）` : ''}</span>` : '';
+  if (e.where === 'store') {
+    const diff = it.online ? it.price - e.price : null;
+    return `
+      <div class="prices">
+        <span class="tag store">賣場</span><span class="now">${money(e.price)}${per}</span>
+        ${e.base ? `<span class="was">${money(e.base)}</span>` : ''}${offText}
+        ${it.store.special ? '<span class="off">專案活動售價</span>' : ''}
+      </div>
+      ${it.online ? `<div class="online">線上 ${money(it.price)}（含運${diff > 0 ? `，比賣場多 ${money(diff)}` : diff === 0 ? '，與賣場同價' : ''}）</div>` : ''}`;
+  }
+  if (e.where === 'online') {
+    return `
+      <div class="prices">
+        <span class="tag">線上</span><span class="now">${money(e.price)}</span>
+        <span class="was">${money(e.base)}</span>${offText}
+      </div>
+      ${it.store ? '<div class="online">賣場價請看優惠券</div>' : ''}`;
+  }
+  return '<div class="prices"><span class="now muted">價格請看優惠券</span></div>';
+}
+
+function unitLine(it) {
+  if (!it.unit) return '';
+  // 每單位價格是線上的；改用賣場價時等比例換算（同一個包裝）
+  const p = it.eff.where === 'store' && it.price ? it.unit.price * it.eff.price / it.price : it.unit.price;
+  return `<div class="unit">每${esc(it.unit.per || '單位')} $${p.toLocaleString('en-US', { maximumFractionDigits: 2 })}</div>`;
+}
+
 function card(it, extraBadges = '') {
   const left = dayDiff(it.end, today);
   const endBadge =
@@ -88,26 +133,25 @@ function card(it, extraBadges = '') {
   const wallet = it.src.includes('wallet');
   const starred = me.stars.includes(it.code);
   const est = storeEstimate(it);
-  const past = lastDeal(it.code, it);
+  const past = lastDeal(it.code, { start: it.start, end: it.end, off: it.off || it.store?.off });
+  const coupon = it.store?.coupon;
+  const showCoupon = coupon && it.eff.where === 'none';  // 讀不出價格時直接攤開優惠券
 
   return `
   <article class="card" data-code="${esc(it.code)}">
-    <a href="${esc(it.url)}" target="_blank" rel="noopener"><img class="pic" src="${esc(it.img)}" alt="" loading="lazy"></a>
+    <a href="${esc(it.url)}" target="_blank" rel="noopener"><img class="pic" src="${esc(it.img || coupon)}" alt="" loading="lazy"></a>
     <div class="body">
       <a class="name" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)}</a>
       <button class="code" data-act="copy" title="複製商品編號">#${esc(it.code)}</button>
-      <div class="prices">
-        <span class="now">${money(it.price)}</span>
-        <span class="was">${money(it.base)}</span>
-        <span class="off">折 ${money(it.off)}（${it.pct}%）</span>
-      </div>
-      ${it.unit ? `<div class="unit">每${esc(it.unit.per || '單位')} $${it.unit.price.toLocaleString('en-US', { maximumFractionDigits: 2 })}</div>` : ''}
+      ${priceBlock(it)}
+      ${unitLine(it)}
       <div class="badges">
-        ${wallet ? '<span class="b wallet">會員護照・賣場同步</span>' : '<span class="b">可能僅限線上</span>'}
+        ${wallet ? `<span class="b wallet">會員護照${it.online ? '・賣場同步' : ''}</span>` : '<span class="b">可能僅限線上</span>'}
+        ${it.online ? '' : '<span class="b storeonly">賣場限定</span>'}
         ${endBadge}
         ${isNew ? '<span class="b new">新上架</span>' : ''}
         ${it.limit ? `<span class="b">限購 ${it.limit}</span>` : ''}
-        ${it.stock ? '' : '<span class="b">線上缺貨</span>'}
+        ${it.online && !it.stock ? '<span class="b">線上缺貨</span>' : ''}
         ${extraBadges}
       </div>
       ${est ? `<div class="store">賣場預估 <strong>${money(est.price)}</strong>
@@ -115,9 +159,11 @@ function card(it, extraBadges = '') {
       ${past ? `<div class="past">上次特價：${ym(past.end)} 折 ${money(past.off)}</div>` : ''}
       <div class="acts">
         <button class="act star" data-act="star" aria-pressed="${starred}">${starred ? '★ 已收藏' : '☆ 收藏'}</button>
-        <button class="act" data-act="store">${me.store[it.code] ? '修改賣場價' : '記錄賣場價'}</button>
+        ${coupon ? `<button class="act" data-act="coupon" aria-expanded="${!!showCoupon}">${showCoupon ? '收起優惠券' : '看優惠券'}</button>` : ''}
+        ${it.eff.where === 'store' ? '' : `<button class="act" data-act="store">${me.store[it.code] ? '修改賣場價' : '記錄賣場價'}</button>`}
       </div>
     </div>
+    ${coupon ? `<img class="coupon" src="${esc(coupon)}" alt="${esc(it.name)} 優惠券" loading="lazy"${showCoupon ? '' : ' hidden'}>` : ''}
   </article>`;
 }
 
@@ -132,7 +178,7 @@ function offCard(code) {
     <div class="body">
       ${h?.url ? `<a class="name" href="${esc(h.url)}" target="_blank" rel="noopener">${esc(h.name)}</a>` : `<span class="name">${esc(h?.name || '（名稱未知）')}</span>`}
       <button class="code" data-act="copy">#${esc(code)}</button>
-      ${past ? `<div class="past">上次特價：${md(past.start)}～${md(past.end)} 折 ${money(past.off)}（線上 ${money(past.price)}）</div>` : ''}
+      ${past ? `<div class="past">上次特價：${md(past.start)}～${md(past.end)} 折 ${money(past.off)}（${past.where === 'store' ? '賣場' : '線上'} ${money(past.price)}）</div>` : ''}
       ${rec ? `<div class="past">你記錄的賣場原價：${money(rec.price)}（${md(rec.date)}）</div>` : ''}
       <div class="acts">
         <button class="act star" data-act="star" aria-pressed="true">★ 已收藏</button>
@@ -153,12 +199,13 @@ function renderGroups() {
     groups.map((g) => `<button class="chip" data-g="${esc(g)}" aria-pressed="${prefs.group === g}">${esc(g)}<span class="n">${counts[g]}</span></button>`).join('');
 }
 
+const offOf = (i) => i.eff.off || 0;
 const sorters = {
-  off: (a, b) => b.off - a.off,
-  pct: (a, b) => b.pct - a.pct || b.off - a.off,
-  end: (a, b) => a.end.localeCompare(b.end) || b.off - a.off,
-  new: (a, b) => (b.start || '').localeCompare(a.start || '') || b.off - a.off,
-  price: (a, b) => a.price - b.price,
+  off: (a, b) => offOf(b) - offOf(a),
+  pct: (a, b) => (b.eff.pct || 0) - (a.eff.pct || 0) || offOf(b) - offOf(a),
+  end: (a, b) => a.end.localeCompare(b.end) || offOf(b) - offOf(a),
+  new: (a, b) => (b.start || '').localeCompare(a.start || '') || offOf(b) - offOf(a),
+  price: (a, b) => (a.eff.price ?? Infinity) - (b.eff.price ?? Infinity),
 };
 
 function renderDeals() {
@@ -263,6 +310,11 @@ function bindUI() {
       saveMe();
       toast(i >= 0 ? '已取消收藏' : '已加入想買清單');
       rerenderCurrent();
+    } else if (act === 'coupon') {
+      const img = cardEl.querySelector('img.coupon');
+      img.hidden = !img.hidden;
+      btn.setAttribute('aria-expanded', !img.hidden);
+      btn.textContent = img.hidden ? '看優惠券' : '收起優惠券';
     } else if (act === 'store') {
       openStoreForm(cardEl, code);
     } else if (act === 'store-save') {

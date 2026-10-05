@@ -9,27 +9,29 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 concurrency:
   group: update
   cancel-in-progress: false
 
 jobs:
-  update:
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+  # 會員護照優惠券要用 macOS 內建的 Vision 辨識文字，所以抓資料在 Mac 上跑
+  fetch:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    outputs:
+      ok: ${{ steps.fetch.outcome }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: 抓取官網特價
+      - name: 編譯 OCR 工具
+        run: swiftc -O scripts/ocr.swift -o "$RUNNER_TEMP/ocr"
+
+      - name: 抓取官網特價與會員護照
         id: fetch
         continue-on-error: true
+        env:
+          OCR_BIN: ${{ runner.temp }}/ocr
         run: python3 scripts/fetch.py
 
       - name: 把新資料存回 repo
@@ -42,10 +44,25 @@ jobs:
             echo "資料沒有變化"
           else
             git commit -m "更新特價資料 $(TZ=Asia/Taipei date '+%Y-%m-%d %H:%M')"
+            git pull --rebase --quiet
             git push
           fi
 
-      # 就算這次抓取失敗，也用上一份資料照常發佈網站
+  # 就算這次抓取失敗，也用上一份資料照常發佈網站
+  deploy:
+    needs: fetch
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main  # 拿 fetch 剛存回去的最新資料
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -54,5 +71,5 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: 抓取失敗時讓這次執行顯示為失敗（GitHub 會寄信通知）
-        if: steps.fetch.outcome != 'success'
+        if: needs.fetch.outputs.ok != 'success'
         run: exit 1
