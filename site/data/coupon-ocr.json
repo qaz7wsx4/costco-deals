@@ -1,405 +1,5 @@
 {
-"202609281025_1": {
-"base": 43999,
-"code": "161794",
-"off": 7500,
-"orange": 0,
-"price": 36499,
-"store": true,
-"unit": null
-},
-"202609281025_10": {
-"base": 569,
-"code": "121872",
-"off": 130,
-"orange": 0,
-"price": 439,
-"store": true,
-"unit": null
-},
-"202609281025_11": {
-"base": 585,
-"code": "139324",
-"off": 130,
-"orange": 0,
-"price": 455,
-"store": true,
-"unit": null
-},
-"202609281025_12": {
-"base": 585,
-"code": "139335",
-"off": 130,
-"orange": 0,
-"price": 455,
-"store": true,
-"unit": null
-},
-"202609281025_13": {
-"base": 319,
-"code": "1022328",
-"off": 80,
-"orange": 0,
-"price": 239,
-"store": true,
-"unit": null
-},
-"202609281025_14": {
-"base": 319,
-"code": "1022330",
-"off": 80,
-"orange": 0,
-"price": 239,
-"store": true,
-"unit": null
-},
-"202609281025_15": {
-"base": 999,
-"code": "337700",
-"off": 200,
-"orange": 0,
-"price": 799,
-"store": true,
-"unit": null
-},
-"202609281025_16": {
-"base": 499,
-"code": "283928",
-"off": 100,
-"orange": 0,
-"price": 399,
-"store": true,
-"unit": null
-},
-"202609281025_17": {
-"base": 359,
-"code": "140064",
-"off": 80,
-"orange": 0,
-"price": 279,
-"store": true,
-"unit": null
-},
-"202609281025_18": {
-"base": 869,
-"code": "137886",
-"off": 180,
-"orange": 0,
-"price": 689,
-"store": true,
-"unit": null
-},
-"202609281025_19": {
-"base": 779,
-"code": "146632",
-"off": 180,
-"orange": 0,
-"price": 599,
-"store": true,
-"unit": null
-},
-"202609281025_2": {
-"base": 24999,
-"code": "161510",
-"off": 5000,
-"orange": 0,
-"price": 19999,
-"store": true,
-"unit": null
-},
-"202609281025_20": {
-"base": 1169,
-"code": "1050700",
-"off": 250,
-"orange": 0,
-"price": 919,
-"store": true,
-"unit": null
-},
-"202609281025_20-1": {
-"base": 889,
-"code": "161403",
-"off": 190,
-"orange": 0,
-"price": 699,
-"store": true,
-"unit": null
-},
-"202609281025_21": {
-"base": 339,
-"code": "226450",
-"off": 80,
-"orange": 0,
-"price": 259,
-"store": true,
-"unit": null
-},
-"202609281025_22": {
-"base": 299,
-"code": "151526",
-"off": 60,
-"orange": 0,
-"price": 239,
-"store": true,
-"unit": null
-},
-"202609281025_23": {
-"base": 429,
-"code": "142415",
-"off": 90,
-"orange": 0,
-"price": 339,
-"store": true,
-"unit": null
-},
-"202609281025_24": {
-"base": 359,
-"code": "146442",
-"off": 74,
-"orange": 0,
-"price": 285,
-"store": true,
-"unit": null
-},
-"202609281025_25": {
-"base": 569,
-"code": "128828",
-"off": 120,
-"orange": 0,
-"price": 449,
-"store": true,
-"unit": null
-},
-"202609281025_26": {
-"base": 319,
-"code": "304631",
-"off": 70,
-"orange": 0,
-"price": 249,
-"store": true,
-"unit": null
-},
-"202609281025_27": {
-"base": 999,
-"code": "614575",
-"off": 200,
-"orange": 0,
-"price": 799,
-"store": true,
-"unit": null
-},
-"202609281025_28": {
-"base": 349,
-"code": "184592",
-"off": 70,
-"orange": 0,
-"price": 279,
-"store": true,
-"unit": null
-},
-"202609281025_29": {
-"base": 359,
-"code": "160701",
-"off": 70,
-"orange": 0,
-"price": 289,
-"store": true,
-"unit": null
-},
-"202609281025_3": {
-"base": 2949,
-"code": "158904",
-"off": 600,
-"orange": 0,
-"price": 2349,
-"store": true,
-"unit": null
-},
-"202609281025_30": {
-"base": 225,
-"code": "183598",
-"off": 45,
-"orange": 0,
-"price": 180,
-"store": true,
-"unit": null
-},
-"202609281025_31": {
-"base": 299,
-"code": "100531",
-"off": 60,
-"orange": 0,
-"price": 239,
-"store": true,
-"unit": null
-},
-"202609281025_32": {
-"base": 369,
-"code": "86373",
-"off": 80,
-"orange": 0,
-"price": 289,
-"store": true,
-"unit": null
-},
-"202609281025_33": {
-"base": 499,
-"code": "68677",
-"off": 100,
-"orange": 0,
-"price": 399,
-"store": true,
-"unit": null
-},
-"202609281025_34": {
-"base": 419,
-"code": "146347",
-"off": 84,
-"orange": 0,
-"price": 335,
-"store": true,
-"unit": null
-},
-"202609281025_35": {
-"base": 269,
-"code": "126917",
-"off": 54,
-"orange": 0,
-"price": 215,
-"store": true,
-"unit": "公斤"
-},
-"202609281025_36": {
-"base": 999,
-"code": "132760",
-"off": 200,
-"orange": 0,
-"price": 799,
-"store": true,
-"unit": null
-},
-"202609281025_37": {
-"code": "152246",
-"orange": 0,
-"price": 419,
-"special": true,
-"store": true
-},
-"202609281025_38": {
-"base": 1799,
-"code": "765268",
-"off": 360,
-"orange": 0,
-"price": 1439,
-"store": true,
-"unit": null
-},
-"202609281025_39": {
-"base": 1799,
-"code": "765269",
-"off": 360,
-"orange": 0,
-"price": 1439,
-"store": true,
-"unit": null
-},
-"202609281025_4": {
-"base": 5999,
-"code": "151607",
-"off": 1300,
-"orange": 0,
-"price": 4699,
-"store": true,
-"unit": null
-},
-"202609281025_40": {
-"base": 1049,
-"code": "234845",
-"off": 210,
-"orange": 0,
-"price": 839,
-"store": true,
-"unit": null
-},
-"202609281025_41": {
-"base": 1289,
-"code": "132361",
-"off": 260,
-"orange": 0,
-"price": 1029,
-"store": true,
-"unit": null
-},
-"202609281025_42": {
-"base": 1799,
-"code": "890908",
-"off": 360,
-"orange": 0,
-"price": 1439,
-"store": true,
-"unit": null
-},
-"202609281025_43": {
-"base": 799,
-"code": "994049",
-"off": 160,
-"orange": 0,
-"price": 639,
-"store": true,
-"unit": null
-},
-"202609281025_44": {
-"base": 1399,
-"code": "363984",
-"off": 280,
-"orange": 0,
-"price": 1119,
-"store": true,
-"unit": null
-},
-"202609281025_45": {
-"base": 779,
-"code": "200762",
-"off": 160,
-"orange": 0,
-"price": 619,
-"store": true,
-"unit": null
-},
-"202609281025_46": {
-"base": 1549,
-"code": "105320",
-"off": 310,
-"orange": 0,
-"price": 1239,
-"store": true,
-"unit": null
-},
-"202609281025_47": {
-"base": 1549,
-"code": "105310",
-"off": 310,
-"orange": 0,
-"price": 1239,
-"store": true,
-"unit": null
-},
-"202609281025_48": {
-"code": null,
-"orange": 0,
-"store": true,
-"toks": [
-{
-"dollar": true,
-"neg": false,
-"raw": "1600",
-"unit": null,
-"v": 1600,
-"y": 0.05470675628474897
-}
-]
-},
-"202609281025_49": {
+"202610261122_1": {
 "code": null,
 "orange": 0,
 "store": true,
@@ -410,127 +10,586 @@
 "raw": "700",
 "unit": null,
 "v": 700,
-"y": 0.051999999436363686
+"y": 0.49199999952499995
+},
+{
+"dollar": true,
+"neg": false,
+"raw": "1600",
+"unit": null,
+"v": 1600,
+"y": 0.639999999675
+},
+{
+"dollar": true,
+"neg": false,
+"raw": "2000",
+"unit": null,
+"v": 2000,
+"y": 0.7949828307279184
 }
 ]
 },
-"202609281025_5": {
-"base": 1089,
-"code": "140715",
+"202610261122_10": {
+"base": 6299,
+"code": "1646074",
+"off": 1400,
+"orange": 0,
+"price": 4899,
+"store": true,
+"unit": null
+},
+"202610261122_11": {
+"base": 749,
+"code": "147360",
+"off": 150,
+"orange": 0,
+"price": 599,
+"store": true,
+"unit": null
+},
+"202610261122_12": {
+"base": 749,
+"code": "147361",
+"off": 150,
+"orange": 0,
+"price": 599,
+"store": true,
+"unit": null
+},
+"202610261122_13": {
+"base": 615,
+"code": "137176",
+"off": 150,
+"orange": 0,
+"price": 465,
+"store": true,
+"unit": null
+},
+"202610261122_14": {
+"base": 699,
+"code": "153378",
+"off": 160,
+"orange": 0,
+"price": 539,
+"store": true,
+"unit": null
+},
+"202610261122_15": {
+"base": 699,
+"code": "153379",
+"off": 160,
+"orange": 0,
+"price": 539,
+"store": true,
+"unit": null
+},
+"202610261122_16": {
+"base": 2399,
+"code": "137368",
+"off": 500,
+"orange": 0,
+"price": 1899,
+"store": true,
+"unit": null
+},
+"202610261122_17": {
+"base": 2999,
+"code": "137369",
+"off": 650,
+"orange": 0,
+"price": 2349,
+"store": true,
+"unit": null
+},
+"202610261122_18": {
+"code": "1450843",
+"orange": 0,
+"store": true,
+"toks": [
+{
+"dollar": false,
+"neg": false,
+"raw": "689",
+"unit": null,
+"v": 689,
+"y": 0.4319999993111112
+},
+{
+"dollar": false,
+"neg": false,
+"raw": "2",
+"unit": null,
+"v": 2,
+"y": 0.5640000003600001
+},
+{
+"dollar": true,
+"neg": false,
+"raw": "535",
+"unit": null,
+"v": 535,
+"y": 0.71200000062
+},
+{
+"dollar": false,
+"neg": false,
+"raw": "689",
+"unit": null,
+"v": 689,
+"y": 0.43599999983333326
+}
+]
+},
+"202610261122_19": {
+"base": 369,
+"code": "139575",
+"off": 80,
+"orange": 0,
+"price": 289,
+"store": true,
+"unit": null
+},
+"202610261122_2": {
+"base": 24999,
+"code": "161519",
+"off": 5000,
+"orange": 0,
+"price": 19999,
+"store": true,
+"unit": null
+},
+"202610261122_20": {
+"base": 799,
+"code": "159343",
+"off": 160,
+"orange": 0,
+"price": 639,
+"store": true,
+"unit": null
+},
+"202610261122_21": {
+"base": 699,
+"code": "593577",
+"off": 160,
+"orange": 0,
+"price": 539,
+"store": true,
+"unit": null
+},
+"202610261122_22": {
+"base": 319,
+"code": "115917",
+"off": 70,
+"orange": 0,
+"price": 249,
+"store": true,
+"unit": null
+},
+"202610261122_23": {
+"base": 319,
+"code": "215918",
+"off": 70,
+"orange": 0,
+"price": 249,
+"store": true,
+"unit": null
+},
+"202610261122_24": {
+"base": 399,
+"code": "101776",
+"off": 80,
+"orange": 0,
+"price": 319,
+"store": true,
+"unit": null
+},
+"202610261122_25": {
+"base": 399,
+"code": "156747",
+"off": 80,
+"orange": 0,
+"price": 319,
+"store": true,
+"unit": null
+},
+"202610261122_26": {
+"base": 299,
+"code": "143951",
+"off": 60,
+"orange": 0,
+"price": 239,
+"store": true,
+"unit": null
+},
+"202610261122_27": {
+"base": 369,
+"code": "108586",
+"off": 80,
+"orange": 0,
+"price": 289,
+"store": true,
+"unit": null
+},
+"202610261122_28": {
+"base": 499,
+"code": "126818",
+"off": 100,
+"orange": 0,
+"price": 399,
+"store": true,
+"unit": null
+},
+"202610261122_29": {
+"base": 299,
+"code": "126819",
+"off": 60,
+"orange": 0,
+"price": 239,
+"store": true,
+"unit": null
+},
+"202610261122_3": {
+"base": 17999,
+"code": "159183",
+"off": 3600,
+"orange": 0,
+"price": 14399,
+"store": true,
+"unit": null
+},
+"202610261122_30": {
+"base": 499,
+"code": "225971",
+"off": 100,
+"orange": 0,
+"price": 399,
+"store": true,
+"unit": null
+},
+"202610261122_31": {
+"base": 539,
+"code": "246280",
+"off": 114,
+"orange": 0,
+"price": 425,
+"store": true,
+"unit": null
+},
+"202610261122_32": {
+"base": 339,
+"code": "144711",
+"off": 70,
+"orange": 0,
+"price": 269,
+"store": true,
+"unit": null
+},
+"202610261122_33": {
+"base": 769,
+"code": "79922",
+"off": 154,
+"orange": 0,
+"price": 615,
+"store": true,
+"unit": null
+},
+"202610261122_34": {
+"base": 499,
+"code": "78299",
+"off": 100,
+"orange": 0,
+"price": 399,
+"store": true,
+"unit": null
+},
+"202610261122_35": {
+"base": 269,
+"code": "246249",
+"off": 54,
+"orange": 0,
+"price": 215,
+"store": true,
+"unit": null
+},
+"202610261122_36": {
+"base": 749,
+"code": "56879",
+"off": 150,
+"orange": 0,
+"price": 599,
+"store": true,
+"unit": null
+},
+"202610261122_37": {
+"base": 399,
+"code": "143877",
+"off": 80,
+"orange": 0,
+"price": 319,
+"store": true,
+"unit": null
+},
+"202610261122_38": {
+"base": 1259,
+"code": "85136",
+"off": 260,
+"orange": 0,
+"price": 999,
+"store": true,
+"unit": null
+},
+"202610261122_39": {
+"base": 569,
+"code": "333404",
+"off": 120,
+"orange": 0,
+"price": 449,
+"store": true,
+"unit": null
+},
+"202610261122_4": {
+"base": 1245,
+"code": null,
 "off": 250,
+"orange": 0,
+"price": 995,
+"store": true,
+"unit": null
+},
+"202610261122_40": {
+"base": 1799,
+"code": "127189",
+"off": 360,
+"orange": 0,
+"price": 1439,
+"store": true,
+"unit": null
+},
+"202610261122_41": {
+"base": 1199,
+"code": "186999",
+"off": 240,
+"orange": 0,
+"price": 959,
+"store": true,
+"unit": null
+},
+"202610261122_42": {
+"base": 1299,
+"code": "142927",
+"off": 260,
+"orange": 0,
+"price": 1039,
+"store": true,
+"unit": null
+},
+"202610261122_43": {
+"base": 389,
+"code": "131632",
+"off": 90,
+"orange": 0,
+"price": 299,
+"store": true,
+"unit": null
+},
+"202610261122_44": {
+"base": 369,
+"code": "146149",
+"off": 80,
+"orange": 0,
+"price": 289,
+"store": true,
+"unit": null
+},
+"202610261122_45": {
+"base": 999,
+"code": "97716",
+"off": 200,
+"orange": 0,
+"price": 799,
+"store": true,
+"unit": null
+},
+"202610261122_46": {
+"base": 999,
+"code": "217306",
+"off": 200,
+"orange": 0,
+"price": 799,
+"store": true,
+"unit": null
+},
+"202610261122_47": {
+"code": "167247",
+"orange": 0,
+"store": true,
+"toks": [
+{
+"dollar": true,
+"neg": false,
+"raw": "86",
+"unit": null,
+"v": 86,
+"y": 0.047999999174999974
+}
+]
+},
+"202610261122_48": {
+"base": 259,
+"code": "229516",
+"off": 54,
+"orange": 0,
+"price": 205,
+"store": true,
+"unit": null
+},
+"202610261122_49": {
+"base": 1299,
+"code": "993999",
+"off": 200,
+"orange": 0,
+"price": 1099,
+"store": true,
+"unit": null
+},
+"202610261122_5": {
+"base": 4389,
+"code": "157741",
+"off": 900,
+"orange": 0,
+"price": 3489,
+"store": true,
+"unit": null
+},
+"202610261122_50": {
+"code": null,
+"orange": 0,
+"store": true,
+"toks": [
+{
+"dollar": true,
+"neg": false,
+"raw": "700",
+"unit": null,
+"v": 700,
+"y": 0.04399999941666666
+}
+]
+},
+"202610261122_51": {
+"code": "154795",
+"orange": 0.39,
+"store": false
+},
+"202610261122_52": {
+"code": "244328",
+"orange": 0.39,
+"store": false
+},
+"202610261122_53": {
+"code": "144329",
+"orange": 0.39,
+"store": false
+},
+"202610261122_54": {
+"code": "208576",
+"orange": 0.39,
+"store": false
+},
+"202610261122_55": {
+"code": "143489",
+"orange": 0.39,
+"store": false
+},
+"202610261122_56": {
+"code": "149471",
+"orange": 0.39,
+"store": false
+},
+"202610261122_57": {
+"code": "147738",
+"orange": 0.39,
+"store": false
+},
+"202610261122_58": {
+"code": "152185",
+"orange": 0.39,
+"store": false
+},
+"202610261122_59": {
+"code": "158277",
+"orange": 0.39,
+"store": false
+},
+"202610261122_6": {
+"base": 6899,
+"code": "153289",
+"off": 1700,
+"orange": 0,
+"price": 5199,
+"store": true,
+"unit": null
+},
+"202610261122_60": {
+"code": "124266",
+"orange": 0.39,
+"store": false
+},
+"202610261122_61": {
+"code": "153085",
+"orange": 0.39,
+"store": false
+},
+"202610261122_62": {
+"code": "138032",
+"orange": 0.39,
+"store": false
+},
+"202610261122_63": {
+"code": "111405",
+"orange": 0.39,
+"store": false
+},
+"202610261122_64": {
+"code": "125360",
+"orange": 0.39,
+"store": false
+},
+"202610261122_65": {
+"code": "217619",
+"orange": 0.39,
+"store": false
+},
+"202610261122_66": {
+"code": "990255",
+"orange": 0.39,
+"store": false
+},
+"202610261122_7": {
+"base": 34799,
+"code": "153555",
+"off": 7000,
+"orange": 0,
+"price": 27799,
+"store": true,
+"unit": null
+},
+"202610261122_8": {
+"base": 1049,
+"code": null,
+"off": 210,
 "orange": 0,
 "price": 839,
 "store": true,
 "unit": null
 },
-"202609281025_50": {
-"code": "1988405",
-"orange": 0.31,
-"store": false
-},
-"202609281025_51": {
-"code": "153965",
-"orange": 0.31,
-"store": false
-},
-"202609281025_52": {
-"code": "158977",
-"orange": 0.31,
-"store": false
-},
-"202609281025_53": {
-"code": null,
-"orange": 0.31,
-"store": false
-},
-"202609281025_54": {
-"code": "125940",
-"orange": 0.31,
-"store": false
-},
-"202609281025_55": {
-"code": "157136",
-"orange": 0.31,
-"store": false
-},
-"202609281025_56": {
-"code": "146545",
-"orange": 0.33,
-"store": false
-},
-"202609281025_57": {
-"code": "146243",
-"orange": 0.31,
-"store": false
-},
-"202609281025_58": {
-"code": "125480",
-"orange": 0.31,
-"store": false
-},
-"202609281025_59": {
-"code": "115777",
-"orange": 0.31,
-"store": false
-},
-"202609281025_6": {
-"base": 3999,
-"code": "138927",
-"off": 820,
+"202610261122_9": {
+"base": 5699,
+"code": "144129",
+"off": 1200,
 "orange": 0,
-"price": 3179,
-"store": true,
-"unit": null
-},
-"202609281025_60": {
-"code": "312200",
-"orange": 0.31,
-"store": false
-},
-"202609281025_61": {
-"code": "960668",
-"orange": 0.31,
-"store": false
-},
-"202609281025_62": {
-"code": "148196",
-"orange": 0.31,
-"store": false
-},
-"202609281025_63": {
-"code": "139388",
-"orange": 0.31,
-"store": false
-},
-"202609281025_64": {
-"code": "91640",
-"orange": 0.31,
-"store": false
-},
-"202609281025_7": {
-"base": 1839,
-"code": "149254",
-"off": 390,
-"orange": 0,
-"price": 1449,
-"store": true,
-"unit": null
-},
-"202609281025_8": {
-"base": 1099,
-"code": "158599",
-"off": 250,
-"orange": 0,
-"price": 849,
-"store": true,
-"unit": null
-},
-"202609281025_9": {
-"base": 1299,
-"code": "1592680",
-"off": 300,
-"orange": 0,
-"price": 999,
+"price": 4499,
 "store": true,
 "unit": null
 }
